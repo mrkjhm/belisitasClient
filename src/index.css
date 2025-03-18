@@ -1,0 +1,202 @@
+@import "tailwindcss";
+@import 'remixicon/fonts/remixicon.css';
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --color-blue: #0D2893;
+}
+
+@layer components {
+  .custom-padding {
+    @apply xl:px-64 lg:px-20 md:px-7 sm:px-20 px-[30px]
+  }
+}
+
+
+h3 {
+  @apply
+    text-4xl font-bold text-[30px]
+}
+
+
+/* @theme {
+
+  --breakpoint-tablet: 40rem;
+  --breakpoint-laptop: 64rem;
+  --breakpoint-desktop: 80rem;
+} */
+
+
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+
+  /* color-scheme: light dark; */
+  /* color: rgba(255, 255, 255, 0.87); */
+  color: #666;
+   background-color: #f6f6f6;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+.chair {
+height: 500px;
+}
+
+.logo {
+  width: 130px;
+}
+
+.logo1 {
+  width: 200px;
+}
+
+.select-category select {
+  border-radius: 0 !important;
+}
+
+.header {
+  background-image:
+          linear-gradient(rgba(47, 47, 47, 0.7), rgba(155, 155, 155, 0.7)),
+          url("./assets/landing-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+
+
+.proudly {
+  background: linear-gradient(to right, #0D2893 50%, #ededff 50%);
+
+}
+
+.made {
+  background-image: url("./assets/made.jpg");
+  background-position: center ;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.landing_bg {
+  background-image: url("./assets/image-1.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 120px;
+  background-position: center;
+  width: 100%;
+}
+
+.background {
+  background-image: url("./assets/background.jpg");
+}
+
+.btn {
+  background: none;
+  border: 2px solid #000;
+  margin: 10px;
+  cursor: pointer;
+  transition: color 0.4s linear;
+  position: relative;
+  display: inline-block;
+}
+
+.btn:hover {
+  color: #fff;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: -1;
+  transition: transform 0.5s;
+  transform-origin: 0 0;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn1::before {
+  transform: scaleX(0);
+}
+
+.btn1:hover::before {
+  transform: scaleX(1);
+}
+
+/*nav item larger screen */
+.nav-item {
+  position: relative;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 5px; /* Space for underline */
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #0D2893; /* Change color on hover */
+}
+
+.nav-item.active {
+  color: #0D2893 /* Change color when active */
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  height: 2px;
+  background-color: #0D2893; /* Active underline color */
+}
+
+
+/*nav item larger screen */
+.nav-item-1 {
+  position: relative;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 5px; /* Space for underline */
+  transition: color 0.3s ease;
+}
+
+.nav-item-1:hover {
+  color: #0D2893; /* Change color on hover */
+}
+
+.nav-item-1.active {
+  color: #0D2893 /* Change color when active */
+}
+
+.nav-item-1.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 20%;
+  height: 2px;
+  background-color: #0D2893; /* Active underline color */
+}
