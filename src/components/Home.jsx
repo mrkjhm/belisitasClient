@@ -54,7 +54,7 @@ export default function Home() {
 
             {/*<ProductBanner />*/}
             <Category />
-            <FeaturedProduct />
+            {/*  <FeaturedProduct /> */}
           {/*  <div className='text-center py-5 my-10 xl:bg-red-500 lg:bg-orange-500 md:bg-yellow-500 sm:bg-green-500 bg-blue-500'>
                 <p className='text-white hidden xl:block'>xl screen</p>
                 <p className='text-white xl:hidden lg:block hidden'>lg screen</p>

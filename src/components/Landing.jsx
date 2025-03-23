@@ -11,7 +11,7 @@ import Button from "./Button.jsx";
 const Landing = () => {
 
 
-    const [ list, setList ] = React.useState([]);
+    const [product, setProduct] = useState([]);
     const navigate = useNavigate();
     const URL = import.meta.env.VITE_URL;
 
@@ -27,7 +27,7 @@ const Landing = () => {
                 // Shuffle and get only 2 random products
                 const randomProducts = products.sort(() => 0.5 - Math.random()).slice(0, 2);
 
-                setList(randomProducts);
+                setProduct(randomProducts);
                 console.log(randomProducts);
             } else {
                 toast.error("Error fetching products.");
@@ -49,26 +49,9 @@ const Landing = () => {
             <div className="lg:px-25 px-5 py-25 mt-15">
                 <div className="container mx-auto relative flex ga xl:flex-row flex-col-reverse gap-10">
                     <div className="flex xl:flex-col md:flex-row flex-col justify-between gap-10 ">
-                        {/*<div className="relative hover:shadow-xl transition-all duration-500 ease-in-out   transform hover:-translate-y-1 border border-gray-200">
-                            <img className="w-full" src={assets.landing_img_3} alt=""/>
-                            <div className="absolute top-0 w-full">
-                                <div className="py-5 px-8 flex  justify-between items-center">
-                                    <p className="py-1 px-3 bg-blue text-white rounded-lg">New</p>
-                                    <p className="text-sm font-semibold">₱200.00</p>
-                                </div>
-                            </div>
-                            <div className="absolute bottom-0 w-full">
-                                <div className="p-5 flex  justify-between items-center">
-                                    <div>
-                                        <p className="text-black font-semibold">Product Name</p>
-                                        <p className="text-sm">Details</p>
-                                    </div>
-                                    <button className="py-1 px-3 border-2 border-gray-300 bg-gray-100 text-[16px]">Buy New</button>
-                                </div>
-                            </div>
-                        </div>*/}
+
                         <div className="grid xl:grid-cols-1 sm:grid-cols-2 gap-5 w-full sm:px-0 px-5">
-                            {list.map((item, index) => (
+                            {product.map((item, index) => (
                                 <motion.div
                                     key={item._id}
                                     initial={{ opacity: 0, y: 50 }} // Start from bottom
@@ -76,19 +59,21 @@ const Landing = () => {
                                     transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.3 }} // Staggered animation
                                     className="w-full"
                                 >
-                                    <div className="relative hover:shadow-xl transition-all duration-500 ease-in-out transform hover:-translate-y-1 bg-white">
-                                        <img
-                                            className="w-full cursor-pointer"
-                                            src={item.images[0]}
-                                            alt=""
-                                            onClick={() => navigate(`/product/${item._id}`)}
-                                        />
+                                    <div className="relative hover:shadow-xl transition-all duration-500 ease-in-out transform hover:-translate-y-1">
+                                        {item.images?.length > 0 && (
+                                            <img
+                                                src={item.images[0]?.url} // ✅ Extract the 'url' field
+                                                alt={item.name}
+                                                className="product-image"
+                                                onError={(e) => (e.target.style.display = 'none')} // Hide broken images
+                                            />
+                                        )}
+
                                         <div className="absolute bottom-0 w-full">
                                             <div className="p-5 flex justify-between items-center">
                                                 <div>
                                                     <p className="text-black font-semibold">{item.name}</p>
-                                                    <p className="text-sm">
-                                                        {item.description.length > 50 ? item.description.slice(0, 20) + "..." : item.description}
+                                                    <p className="text-sm">{item.code}
                                                     </p>
                                                 </div>
                                                 <p className="text-blue font-semibold text-lg">₱ {item.price}</p>

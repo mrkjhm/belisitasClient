@@ -10,19 +10,22 @@ export default function ProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  const [categories, setCategories] = useState([]); // ✅ Store categories
+
+
   const categoryFromURL = searchParams.get("category") || "all";
   const pageFromURL = parseInt(searchParams.get("page")) || 1; // ✅ Get page from URL
 
   const [selectedCategory, setSelectedCategory] = useState(categoryFromURL);
   const [currentPage, setCurrentPage] = useState(pageFromURL); // ✅ Set state from URL
-  const [list, setList] = useState([]);
+  const [product, setProduct] = useState([]);
 
   const productsPerPage = 6;
 
   const filteredList =
       selectedCategory === "all"
-          ? list
-          : list.filter((item) => item.category.toLowerCase() === selectedCategory.toLowerCase());
+          ? product
+          : product.filter((item) => item.category.toLowerCase() === selectedCategory.toLowerCase());
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -33,11 +36,29 @@ export default function ProductList() {
   const URL = import.meta.env.VITE_URL;
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(`${URL}/categories`);
+        if (response.data.success) {
+          setCategories(response.data.data);
+        } else {
+          toast.error("Error fetching categories");
+        }
+      } catch (error) {
+        toast.error("Server Error");
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+
+  useEffect(() => {
     const fetchList = async () => {
       try {
         const response = await axios.get(`${URL}/products/`);
         if (response.data.success) {
-          setList(response.data.data);
+          setProduct(response.data.data);
         } else {
           toast.error("Error fetching products");
         }
@@ -115,7 +136,7 @@ export default function ProductList() {
                   className="w-full px-4 py-2 border rounded-lg bg-gray-200"
               >
                 <option value="all">All Categories</option>
-                {Array.from(new Set(list.map((item) => item.category))).map((category) => (
+                {categories.map((category) => (
                     <option key={category} value={category}>{category}</option>
                 ))}
               </select>
@@ -133,9 +154,9 @@ export default function ProductList() {
                 >
                   All Categories
                 </button>
-                {Array.from(new Set(list.map((item) => item.category))).map((category) => (
+                {categories.map((category) => (
                     <button
-                        key={category} // ✅ Use category instead of index
+                        key={category}
                         className={`px-4 py-1 text-left transition-all ${selectedCategory === category ? "text-blue font-semibold" : ""}`}
                         onClick={() => handleCategoryChange(category)}
                     >
