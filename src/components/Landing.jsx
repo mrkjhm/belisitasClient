@@ -64,8 +64,9 @@ const Landing = () => {
                                             <img
                                                 src={item.images[0]?.url} // ✅ Extract the 'url' field
                                                 alt={item.name}
-                                                className="product-image"
-                                                onError={(e) => (e.target.style.display = 'none')} // Hide broken images
+                                                className="cursor-pointer product-image"
+                                                onClick={() => navigate(`/product/${item._id}`)}
+                                                 // Hide broken images
                                             />
                                         )}
 

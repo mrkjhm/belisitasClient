@@ -10,16 +10,7 @@ export default function FeaturedProduct() {
     const [list, setList] = useState([]);
     const navigate = useNavigate();
     const URL = import.meta.env.VITE_URL;
-    const swiperRef = useRef(null); // Reference for Swiper instance
-
-    const categorySelection = {
-        Chair: 1,
-        "Pendant light": 1,
-        Basket: 1,
-        "Table Lamp": 1,
-        Hamper: 3,
-        Mirror: 0
-    };
+    const swiperRef = useRef(null);
 
     const fetchList = async () => {
         try {
@@ -37,32 +28,10 @@ export default function FeaturedProduct() {
     };
 
     const selectFeaturedProducts = (products) => {
-        const categoryGroups = {};
-        const normalizedCategorySelection = {};
-        Object.entries(categorySelection).forEach(([key, value]) => {
-            normalizedCategorySelection[key.toLowerCase().trim()] = value;
-        });
+        if (products.length <= 6) return products; // If 6 or fewer, return all
 
-        products.forEach((product) => {
-            const category = product.category.toLowerCase().trim();
-            if (!categoryGroups[category]) {
-                categoryGroups[category] = [];
-            }
-            categoryGroups[category].push(product);
-        });
-
-        const selectedProducts = [];
-        Object.entries(categoryGroups).forEach(([category, items]) => {
-            const selectedIndex = normalizedCategorySelection[category];
-
-            if (selectedIndex !== undefined && selectedIndex < items.length) {
-                selectedProducts.push(items[selectedIndex]);
-            } else {
-                selectedProducts.push(items[0]);
-            }
-        });
-
-        return selectedProducts.slice(0, 6);
+        // Shuffle and pick the first 6
+        return [...products].sort(() => Math.random() - 0.5).slice(0, 6);
     };
 
     useEffect(() => {
@@ -86,51 +55,43 @@ export default function FeaturedProduct() {
                         1024: { slidesPerView: 3 },
                         1280: { slidesPerView: 4 }
                     }}
-                    loop={list.length > 4} // ✅ Enable loop only if more than 4 products
+                    loop={list.length > 4}
                     className="relative flex justify-center"
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                 >
-
-                    {list.map((item, index) => (  // ✅ Add index here
+                    {list.map((item) => (
                         <SwiperSlide key={item._id} className="sm:px-0 px-15 pb-7 pt-5 flex justify-center">
-                        <div className="bg-white p-4 hover:shadow-xl transition-all duration-500 ease-in-out transform hover:-translate-y-1 mx-auto">
+                            <div className="bg-white p-3 hover:shadow-xl transition-all duration-500 ease-in-out transform hover:-translate-y-1 mx-auto">
                                 {item.images?.length > 0 && (
                                     <img
-                                        src={item.images[0]}
-                                        alt={item.name}  // ✅ Now using index safely
+                                        src={item.images[0]?.url}
+                                        alt={item.name}
                                         onClick={() => navigate(`/product/${item._id}`)}
                                         className="bg-gray-100 cursor-pointer mb-3 w-full"
                                     />
                                 )}
                                 <p className="sm:text-2xl text-[20px] font-semibold mb-1">{item.name}</p>
-                                <p className="font-bold sm:text-[16px ]text-sm text-blue">
+                                <p className="font-bold sm:text-[16px] text-sm text-blue">
                                     ₱ {item.price}.00
                                 </p>
                             </div>
                         </SwiperSlide>
                     ))}
-
                 </Swiper>
 
-
                 {/* Custom Navigation Buttons */}
-                {/* Previous Button */}
                 <button
                     onClick={() => swiperRef.current?.slidePrev()}
                     className="absolute top-1/2 left-2 sm:left-[-40px] transform -translate-y-1/2 bg-white shadow-lg rounded-full p-3 text-black hover:bg-gray-200 transition z-10"
                 >
                     ❮
                 </button>
-
-                {/* Next Button */}
                 <button
                     onClick={() => swiperRef.current?.slideNext()}
                     className="absolute top-1/2 right-2 sm:right-[-40px] transform -translate-y-1/2 bg-white shadow-lg rounded-full p-3 text-black hover:bg-gray-200 transition z-10"
                 >
                     ❯
                 </button>
-
-
             </div>
         </div>
     );
