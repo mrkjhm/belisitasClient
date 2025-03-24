@@ -70,7 +70,7 @@ export default function Navbar() {
                             <ul className="flex gap-8 cursor-pointer">
                                 <NavLink to='/' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}><li>Home</li></NavLink>
                                 <NavLink to='/about-us' className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}><li>About Us</li></NavLink>
-                                <NavLink to='/product' className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}><li>Products</li></NavLink>
+                                <NavLink to='/category/all' className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}><li>Products</li></NavLink>
                                 <NavLink to="/contact-us" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}><li>Contact Us</li></NavLink>
                             </ul>
                         </div>
@@ -88,7 +88,7 @@ export default function Navbar() {
                             <ul className="text-left p-10 space-y-6">
                                 <NavLink to='/' onClick={toggleMenu} className={({ isActive }) => isActive ? "nav-item-1 active" : "nav-item"}><li className="my-5">Home</li></NavLink>
                                 <NavLink to='/about-us' onClick={toggleMenu} className={({ isActive }) => isActive ? "nav-item-1 active" : "nav-item"}><li className="my-5">About Us</li></NavLink>
-                                <NavLink to="/product" onClick={toggleMenu} className={({ isActive }) => isActive ? "nav-item-1 active" : "nav-item"}><li>Products</li></NavLink>
+                                <NavLink to="/category/all" onClick={toggleMenu} className={({ isActive }) => isActive ? "nav-item-1 active" : "nav-item"}><li>Products</li></NavLink>
                                 <NavLink to="/contact-us" onClick={toggleMenu} className={({ isActive }) => isActive ? "nav-item-1 active" : "nav-item"}><li className="my-5">Contact Us</li></NavLink>
                             </ul>
                         </div>

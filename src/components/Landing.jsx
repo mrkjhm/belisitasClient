@@ -10,13 +10,9 @@ import Button from "./Button.jsx";
 
 const Landing = () => {
 
-
     const [product, setProduct] = useState([]);
     const navigate = useNavigate();
     const URL = import.meta.env.VITE_URL;
-
-
-
 
     const fetchList = async () => {
         try {
@@ -28,7 +24,7 @@ const Landing = () => {
                 const randomProducts = products.sort(() => 0.5 - Math.random()).slice(0, 2);
 
                 setProduct(randomProducts);
-                console.log(randomProducts);
+
             } else {
                 toast.error("Error fetching products.");
             }
@@ -53,7 +49,7 @@ const Landing = () => {
                         <div className="grid xl:grid-cols-1 sm:grid-cols-2 gap-5 w-full sm:px-0 px-5">
                             {product.map((item, index) => (
                                 <motion.div
-                                    key={item._id}
+                                    key={item.name}
                                     initial={{ opacity: 0, y: 50 }} // Start from bottom
                                     animate={{ opacity: 1, y: 0 }} // Move up
                                     transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.3 }} // Staggered animation
@@ -64,9 +60,10 @@ const Landing = () => {
                                             <img
                                                 src={item.images[0]?.url} // ✅ Extract the 'url' field
                                                 alt={item.name}
-                                                className="cursor-pointer product-image"
-                                                onClick={() => navigate(`/product/${item._id}`)}
+                                                className="cursor-pointer product-image w-full  border-gray-100  shadow-sm"
+
                                                  // Hide broken images
+                                                onClick={() => navigate(`/product/${item.name.toLowerCase().replace(/\s+/g, "-")}`)}
                                             />
                                         )}
 

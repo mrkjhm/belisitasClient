@@ -5,6 +5,7 @@ import { assets } from '../assets/assets'
 
 
 export default function About() {
+
   return (
     <>
 
@@ -54,7 +55,7 @@ export default function About() {
           <div className='flex items-center justify-center sm:px-5 px-[15px]'>
 
             {/* <img src={assets.chair_3} alt="" /> */}
-            <img className='rounded-2xl' src={assets.product_7} alt="" />
+            <img className='rounded-2xl' src={assets.banner_img1} alt="" />
           </div>
         </div>
       </motion.div>

@@ -18,7 +18,7 @@ const LandingComponent = () => {
                                     <p className="font-semibold text-lg">Lorem Ipsum</p>
                                     <p>Lorem ipsum.</p>
                                 </div>
-                                <Button text="View" textColor="#666" link="/product" className="border-2 border-gray-500 sm:px-3 sm:py-2 px-2 py-1  sm:text-[16px] text-sm"/>
+                                <Button text="View" textColor="#666" link="/category/all" className="border-2 border-gray-500 sm:px-3 sm:py-2 px-2 py-1  sm:text-[16px] text-sm"/>
                             </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@ const LandingComponent = () => {
                                 <p className="text-sm w-50 md:mb-5 mb-3">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum posuere accumsan.
                                 </p>
-                                <Button text="View products" textColor="#666" link="/product" className="border-2 border-gray-500 sm:px-3 sm:py-2 px-2 py-1  sm:text-[16px] text-sm"/>
+                                <Button text="View products" textColor="#666" link="/category/all" className="border-2 border-gray-500 sm:px-3 sm:py-2 px-2 py-1  sm:text-[16px] text-sm"/>
                             </div>
                         </div>
                     </div>

@@ -33,7 +33,7 @@ function App() {
           <Route path='/product/:id' element={ <ProductDetail />}/>
           <Route
               path="/category/:categoryName"
-              element={ <ProductList key={window.location.pathname} />}/>
+              element={ <ProductList />}/>
         </Routes>
         </AnimatePresence>
         <Footer />

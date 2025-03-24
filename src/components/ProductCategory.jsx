@@ -47,7 +47,7 @@ export default function ProductCategory() {
                             <div
                                 key={category._id}
                                 className="bg-white p-5 flex flex-col items-start hover:shadow-xl transition-all duration-600 ease-in-out transform hover:-translate-y-1"
-                                onClick={() => navigate(`/product?category=${category._id}&page=1`)}
+                                onClick={() => navigate(`/category/${category.name.toLowerCase().replace(/\s+/g, "-")}`)}
                             >
                                 {/* Show default image if no match found */}
                                 <img

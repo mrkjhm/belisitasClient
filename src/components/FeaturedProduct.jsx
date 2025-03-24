@@ -60,13 +60,13 @@ export default function FeaturedProduct() {
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                 >
                     {list.map((item) => (
-                        <SwiperSlide key={item._id} className="sm:px-0 px-15 pb-7 pt-5 flex justify-center">
+                        <SwiperSlide key={item.name} className="sm:px-0 px-15 pb-7 pt-5 flex justify-center">
                             <div className="bg-white p-3 pb-5 hover:shadow-xl transition-all duration-500 ease-in-out transform hover:-translate-y-1 mx-auto">
                                 {item.images?.length > 0 && (
                                     <img
                                         src={item.images[0]?.url}
                                         alt={item.name}
-                                        onClick={() => navigate(`/product/${item._id}`)}
+                                        onClick={() => navigate(`/product/${item.name.toLowerCase().replace(/\s+/g, "-")}`)}
                                         className="bg-gray-100 cursor-pointer mb-3 w-full"
                                     />
                                 )}

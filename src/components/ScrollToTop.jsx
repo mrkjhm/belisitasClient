@@ -1,19 +1,20 @@
-import { useEffect } from "react";  // Import useEffect hook to handle side effects
-import { useLocation } from "react-router-dom"; // Import useLocation to get the current page path
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function ScrollToTop() {
-    // Get the current URL path from React Router
     const { pathname } = useLocation();
+    const prevPath = useRef(pathname); // Store previous path
 
     useEffect(() => {
-        // Whenever the pathname changes (user navigates to a new page), scroll to the top
-        window.scrollTo(0, 0);
+        // Check if the previous and current path are in the same category
+        const isSameCategoryPage = prevPath.current.startsWith("/category/") && pathname.startsWith("/category/");
 
-        // Optional: Log the new page path for debugging purposes
-        // console.log(`Navigated to: ${pathname}`);
+        if (!isSameCategoryPage) {
+            window.scrollTo(0, 0);
+        }
 
-    }, [pathname]); // Effect runs every time 'pathname' updates (whenever a new page is visited)
+        prevPath.current = pathname; // Update previous path
+    }, [pathname]);
 
-    // This component does not return any visible UI; it's just for functionality
     return null;
 }

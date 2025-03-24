@@ -68,10 +68,11 @@ export default function Category() {
                     className="w-full max-w-6xl"
                 >
                     {categories.map((category) => (
-                        <SwiperSlide key={category._id} className="my-5">
+                        <SwiperSlide key={category.name} className="my-5">
 
                             <div className="bg-white flex flex-col justify-center items-center hover:shadow-lg cursor-pointer transition-all duration-500 ease-in-out transform hover:-translate-y-1 p-6"
-                                 onClick={() => navigate(`/product?category=${category._id}&page=1`)}
+                                 // onClick={() => navigate(`/product?category=${category.name}`)}
+                                 onClick={() => navigate(`/category/${category.name.toLowerCase().replace(/\s+/g, "-")}`)}
                             >
                                 {iconMapping[category.name] || <GrBasket className="text-lg" />} {/* Default icon */}
                                 <p className="text-center">{category.name}</p>
