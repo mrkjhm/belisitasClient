@@ -100,6 +100,14 @@ export const assets = {
 //     Banner
     banner_img,
     banner_img1,
+
+//     Product Category
+    product_category_chair,
+    product_category_basket,
+    product_category_pendant_light,
+    product_category_table_lamp,
+    product_category_mirror,
+    product_category_hamper
 }
 
 export const product_list = [

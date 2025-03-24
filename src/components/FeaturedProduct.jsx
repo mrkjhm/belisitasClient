@@ -61,7 +61,7 @@ export default function FeaturedProduct() {
                 >
                     {list.map((item) => (
                         <SwiperSlide key={item._id} className="sm:px-0 px-15 pb-7 pt-5 flex justify-center">
-                            <div className="bg-white p-3 hover:shadow-xl transition-all duration-500 ease-in-out transform hover:-translate-y-1 mx-auto">
+                            <div className="bg-white p-3 pb-5 hover:shadow-xl transition-all duration-500 ease-in-out transform hover:-translate-y-1 mx-auto">
                                 {item.images?.length > 0 && (
                                     <img
                                         src={item.images[0]?.url}
@@ -70,10 +70,17 @@ export default function FeaturedProduct() {
                                         className="bg-gray-100 cursor-pointer mb-3 w-full"
                                     />
                                 )}
-                                <p className="sm:text-2xl text-[20px] font-semibold mb-1">{item.name}</p>
-                                <p className="font-bold sm:text-[16px] text-sm text-blue">
-                                    ₱ {item.price}.00
-                                </p>
+                                <div>
+                                    <p className="sm:text-2xl text-[20px] font-semibold mb-1">{item.name}</p>
+                                    <div className="flex justify-between">
+
+                                            <p className="font-bold sm:text-[16px] text-sm text-blue">₱ {item.price}.00</p>
+                                            <p className="text-sm">Code: {item.code}</p>
+
+
+                                    </div>
+
+                                </div>
                             </div>
                         </SwiperSlide>
                     ))}

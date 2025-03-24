@@ -1,44 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { product_category } from "../assets/assets";
+import axios from "axios";
+import { product_category } from "../assets/assets.jsx";
 
 export default function ProductCategory() {
     const navigate = useNavigate();
-    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [categories, setCategories] = useState([]);
+    const URL = import.meta.env.VITE_URL; // Your backend URL
+
+    // **Define the 6 categories you want to show**
+    const selectedCategories = ["Chair", "Pendant Light", "Basket", "Mirror", "Table Lamp", "Hamper"];
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get(`${URL}/categories`);
+                if (response.data.success) {
+                    setCategories(response.data.categories);
+                } else {
+                    console.error("Error fetching categories");
+                }
+            } catch (error) {
+                console.error("Failed to load categories", error);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
+    // **Filter only the selected categories**
+    const filteredCategories = categories.filter((category) =>
+        selectedCategories.includes(category.name)
+    );
 
     return (
-        <div className="xl:px-70 lg:px-20 md:px-7 sm:px-20 px-[30px] md:my-20 my-10">
+        <div className="custom-padding md:my-20 my-10">
             <div className="container mx-auto">
                 <div className="grid grid-rows-2 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
-                    {product_category.map((item, index) => (
-                        <div
-                            key={index}
-                            className="bg-white p-5 flex flex-col items-start hover:shadow-xl transition-all duration-600 ease-in-out transform hover:-translate-y-1"
-                        >
+                    {filteredCategories.map((category) => {
+                        // Find matching category from assets
+                        const matchedCategory = product_category.find(
+                            (item) => item.product_category_name === category.name
+                        );
+
+                        return (
                             <div
-                                className="relative w-full flex justify-center cursor-pointer mb-3"
-                                // onMouseEnter={() => setHoveredIndex(index)}
-                                // onMouseLeave={() => setHoveredIndex(null)}
-                                onClick={() => navigate(`/product?category=${item.product_category_name}`)}
+                                key={category._id}
+                                className="bg-white p-5 flex flex-col items-start hover:shadow-xl transition-all duration-600 ease-in-out transform hover:-translate-y-1"
+                                onClick={() => navigate(`/product?category=${category._id}&page=1`)}
                             >
-                                {/* Base Image */}
+                                {/* Show default image if no match found */}
                                 <img
-                                    className={`px-10 transition-opacity duration-500 ease-in-out -mt-10 ${hoveredIndex === index ? "opacity-0" : "opacity-100"}`}
-                                    src={item.product_category_image}
-                                    alt={item.product_category_name}
+                                    className="w-full px-10 hover:-translate-y-1 transition-all duration-600 ease-in-out transform -mt-10 mb-5"
+                                    src={matchedCategory ? matchedCategory.product_category_image : "/default-image.png"}
+                                    alt={category.name}
                                 />
-                                {/* Hover Image */}
-                                <img
-                                    className={`absolute top-0 px-10 transition-all duration-500 ease-in-out  ${hoveredIndex === index ? "opacity-100" : "opacity-0"}`}
-                                    src={item.hoverImage}
-                                    alt={item.product_category_name}
-                                />
+
+                                <p className=" sm:text-2xl text-[20px] font-semibold">
+                                    {category.name}
+                                </p>
                             </div>
-                            <p className="mb-2 sm:text-2xl text-[20px] font-semibold">
-                                {item.product_category_name}
-                            </p>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </div>

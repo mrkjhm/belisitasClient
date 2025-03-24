@@ -74,7 +74,7 @@ const Landing = () => {
                                             <div className="p-5 flex justify-between items-center">
                                                 <div>
                                                     <p className="text-black font-semibold">{item.name}</p>
-                                                    <p className="text-sm">{item.code}
+                                                    <p className="text-sm">Code: {item.code}
                                                     </p>
                                                 </div>
                                                 <p className="text-blue font-semibold text-lg">₱ {item.price}</p>

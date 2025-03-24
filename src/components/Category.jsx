@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 // Import icons
 import { GiMirrorMirror } from "react-icons/gi";
@@ -44,24 +49,36 @@ export default function Category() {
 
     return (
         <div className="custom-padding border-b border-gray-200 md:py-20 py-10">
-            <div className='container mx-auto space-y-2 text-center mb-10'>
+            <div className=" space-y-5 text-center mb-5">
                 <h3>Choose your Category</h3>
-                <p className="mx-auto h-1 w-12 border-b-[2px] border-blue"></p>
+                <div className="mx-auto h-1 w-12 border-b-[2px] border-blue"></div>
             </div>
             <div className="flex justify-center">
-                <div className='lg:flex lg:flex-wrap grid sm:grid-cols-3 grid-cols-2 gap-10 justify-center'>
+                <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={2} // Default for mobile
+
+                    breakpoints={{
+                        640: { slidesPerView: 3 },
+                        768: { slidesPerView: 4 },
+                        1024: { slidesPerView: 5 },
+                        1280: { slidesPerView: 6 }
+                    }}
+                    className="w-full max-w-6xl"
+                >
                     {categories.map((category) => (
-                        <div
-                            key={category._id}  // Assuming _id exists in backend data
-                            className='h-30 w-30 bg-white flex flex-col justify-center items-center hover:shadow-lg cursor-pointer
-                            transition-all duration-500 ease-in-out transform hover:-translate-y-1'
-                            onClick={() => navigate(`/product?category=${category.name}`)}
-                        >
-                            {iconMapping[category.name] || <GrBasket className="text-lg mb-1" />} {/* Default icon */}
-                            <p>{category.name}</p>
-                        </div>
+                        <SwiperSlide key={category._id} className="my-5">
+
+                            <div className="bg-white flex flex-col justify-center items-center hover:shadow-lg cursor-pointer transition-all duration-500 ease-in-out transform hover:-translate-y-1 p-6"
+                                 onClick={() => navigate(`/product?category=${category._id}&page=1`)}
+                            >
+                                {iconMapping[category.name] || <GrBasket className="text-lg" />} {/* Default icon */}
+                                <p className="text-center">{category.name}</p>
+                            </div>
+                        </SwiperSlide>
                     ))}
-                </div>
+                </Swiper>
             </div>
         </div>
     );

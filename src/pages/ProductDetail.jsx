@@ -81,9 +81,9 @@
                                 {/* Small Thumbnail Images (Hide Active Image) */}
                             </div>
                             <div className="flex flex-col justify-between">
-                                <div className='text-detail space-y-3 mb-8'>
-                                    <h1 className='font-bold text-3xl'>{product.name}</h1>
-                                    <p className='font-semibold text-blue-800'>₱ {product.price}</p>
+                                <div className='text-detail space-y-5 mb-8'>
+                                    <h1 className='font-bold text-4xl mb-6'>{product.name}</h1>
+                                    <p className='font-bold text-2xl'> <span className="bg-blue px-5  py-2 rounded text-white">₱ {product.price}</span></p>
                                     <p className='text-xl'><span className="text-sm">Details:</span> <br /> {product.description}</p>
                                     <p><span className="text-sm">Category:</span> <br /> {product.category?.name || "No Category"}</p>
                                     <p><span className="text-sm">Code:</span> <br /> <span className="font-bold">{product.code}</span></p>
