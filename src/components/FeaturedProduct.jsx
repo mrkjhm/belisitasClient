@@ -67,7 +67,7 @@ export default function FeaturedProduct() {
                                         src={item.images[0]?.url}
                                         alt={item.name}
                                         onClick={() => navigate(`/product/${item.name.toLowerCase().replace(/\s+/g, "-")}`)}
-                                        className="bg-gray-100 cursor-pointer mb-3 w-full"
+                                        className="bg-[#f2f2f2] cursor-pointer mb-3 w-full"
                                     />
                                 )}
                                 <div>
